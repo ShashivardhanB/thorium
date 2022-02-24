@@ -1,127 +1,99 @@
 const express = require('express');
 const router = express.Router();
 
- let  players = [ {
-     "name": "manish",
-    "dob": "1/1/1995",
-    "gender": "male",
-    "city": "jalandhar",
-    "sports": [
-      "swimming"
-    ],
-    "bookings": [{
-  "bookingId": 1,
-    "sportId": "" ,
-    "centerId": "",
-    "type": "private",
-   "slot": '16286598000000',
-   "bookedOn": '31/08/2021',
-   "bookedFor": '01/09/2021'
-  },
-  {
-   "bookingId": 2,
-    "sportId": " ",
-    "centerId": " ",
-   "type": "private",
-   "slot": '16286518000000',
-   "bookedOn": '31/08/2001',
-   "bookedFor": '01/09/2001'
-  },]
-  },
-  {
-   "name": "gopal",
-   "dob": "1/09/1995",
-  "gender": "male",
-  "city": "delhi",
-  "sports": [
-  "soccer"
-   ],
-  "bookings": [{
-   "bookingId": 1,
-
-       "sportId": "" ,
-        "centerId": "",
-       "type": "private",
-       "slot": '16286598000000',
-       "bookedOn": '31/08/2021',
-       "bookedFor": '01/09/2021'
-        },
-       {
-        "bookingId": 2,
-        "sportId": " ",
-        "centerId": " ",
-       "type": "private",
-       "slot": '16286518000000',
-       "bookedOn": '31/08/2001',
-       "bookedFor": '01/09/2001'
-       }, ]
-     },
-  {
-  "name": "lokesh",
-  "dob": "1/1/1990",
-  "gender": "male",
-  "city": "mumbai",
-  "sports": [
-   "soccer"
- ],
-  "bookings": [{
-  "bookingId": 1,
-        "sportId": "" ,
-       "centerId": "",
-     "type": "private",
-     "slot": '16286598000000',
-       "bookedOn": '31/08/2021',
-       "bookedFor": '01/09/2021'
-        },
-       {
-        "bookingId": 2,
-       "sportId": " ",
-         "centerId": " ",
-       "type": "private",
-       "slot": '16286518000000',
-       "bookedOn": '31/08/2001',
-       "bookedFor": '01/09/2001'
-      },]
-   },
-  ]
-  let  array = [ ];
-  for (let i=0;i<players.length;i++){
-    const found = players[i].name;
-    
-    array.push(found);
-  }
-    router.post("/test-post", function(req, res) {
-        let id = req.body.user
-         const old = array.find(element => element == id);
-          if (old !== id){
-            players.push(id);
-           }
-      res.send({data:players})
+// QUERY PARAMS
+// localhost:3000/get-query-1?myCoolVar=24&xyz=hiFunctionUP
+router.get("/get-query-1", function (req, res) {
+    let data = req.query
+    console.log(data)
+    res.send({ data: data, status: true })
 })
 
 
-router.post("/test-post-2", function(req, res) {
-    res.send(  { msg: "hi" , status: true }  )
+// take marks in req.query variable named "marks" and send "pass" if > 40 else "fail"
+router.get("/get-query-2", function (req, res) {
+    let marks = req.query.marks
+    // { marks: '80'}
+
+    let result = marks > 40 ? "pass" : "fail"
+    // let result = "fail"
+    // if (marks> 40) { result = "pass" }
+    // // else { result = "fail" }
+
+    res.send({ result: result, status: true })
 })
 
-router.post("/test-post-3", function(req, res) {
-    // let id = req.body.user
-    // let pwd= req.body.password
+//query params are also available in post request
+router.post("/post-query-1", function (req, res) {
+    let data = req.query
+    console.log(data)
+    res.send({ result: data, status: true })
+})
 
-    // console.log( id , pwd)
+let myArr = [23, 45, 67, 281394, 32424, 423, 24, 42323, 4, 234, 12, 34]
+//filter out all the numbers that are greater than input( input is received from query params)
+router.post("/post-query-2", function (req, res) {
+    //CODE HERE
+    let input= req.query.input
+     
+    // let finalArr=[]
+    // for (i=0 ; i<myArr.length; i++) {
+    //     if ( myArr[i] > input )      finalArr.push(myArr[i]) 
+    // }
+    res.send({ result: finalArr , status: true })
+})
 
-    console.log( req.body )
 
-    res.send(  { msg: "hi" , status: true }  )
+// ASSIGNMENT:
+// you will be given an array of persons ( i.e an array of objects )..each person will have  a {name: String , age: Number, votingStatus: true/false(Boolean)}
+// take input in query param as votingAge..and for all the people above that age, change votingStatus as true
+// also return an array consisting of only the person that can vote
+
+//  take this as sample for array of persons:
+let persons= [
+    {
+    name: "PK",
+    age: 10,
+    votingStatus: false
+},
+{
+    name: "SK",
+    age: 20,
+    votingStatus: false
+},
+{
+    name: "AA",
+    age: 70,
+    votingStatus: false
+},
+{
+    name: "SC",
+    age: 5,
+    votingStatus: false
+},
+{
+    name: "HO",
+    age: 40,
+    votingStatus: false
+}
+]
+let personCanvote = []
+router.post("/post-query-3", function (req, res) {
+    let input= req.query.input
+    for (i=0; i<persons.length;i++)
+    {
+        let  ages = persons[i].age
+        
+       if (input <= ages) { persons[i].votingStatus =true   
+         personCanvote.push(persons[i].name) }
+       
+    }
+    res.send({ persons ,personCanvote})
 })
 
 
 
-router.post("/test-post-4", function(req, res) {
-    let arr= [ 12, "functionup"]
-    let ele= req.body.element
-    arr.push(ele)
-    res.send(  { msg: arr , status: true }  )
-})
+
+
 
 module.exports = router;
