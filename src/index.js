@@ -20,3 +20,9 @@ app.use('/', route);
 app.listen(process.env.PORT || 3000, function () {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 }); 
+
+
+// netstat -ano | findstr :3000
+
+// taskkill /PID PID /F
+
