@@ -31,23 +31,24 @@ let bkName = bookDetails[0].name
   let  updatedPrice = await bookModel.findOneAndUpdate({name:bkName}, {price:100},{new:true}).select({price:1, _id:0})
 
   res.send({msg:authorN, updatedPrice})
-
+ 
 }
 
      
 const authorsName = async function (req,res) {
   const booksId= await bookModel.find({price: {$gte:50, $lte:100}}).select({author_id:1, _id:0})
-  const id = booksId.map(inp => inp.author_id)
-  let temp =[]
-  for(let i=0; i<id.length; i++) {
-      let x = id[i]
-      const author = await authorModel.find({author_id:x}).select({author_name:1, _id:0})
-      temp.push(author)
-  }
+//   console.log(booksId)
+//   const id = booksId.map(inp => inp.author_id)
+//   let temp =[]
+//   for(let i=0; i<id.length; i++) {
+//       let x = id[i]
+//       const author = await authorModel.find({author_id:x}).select({author_name:1, _id:0})
+//       temp.push(author)
+//   }
 
- const authorName = temp.flat()
+//  const authorName = temp.flat()
 
-res.send({msg:authorName})
+res.send({msg:booksId})
 }
     
 module.exports.createBook= createBook
