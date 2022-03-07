@@ -10,14 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-const midwar= function(req,res,next){
-    console.log( new Date().toLocaleString(),req.ip,req.originalUrl)
 
-    next()
 
-    
-}
-app.use(midwar)
 mongoose.connect("mongodb+srv://functionup-cohort:G0Loxqc9wFEGyEeJ@cluster0.rzotr.mongodb.net/shashi-DB?retryWrites=true&w=majority", {
     useNewUrlParser: true
 })
@@ -33,7 +27,9 @@ app.listen(process.env.PORT || 3000, function () {
 
 
 // 
+// 
+
 // netstat -ano | findstr :3000
 
 
-// netstat -ano | findstr :3000  netstat -ano | findstr :3000 
+
