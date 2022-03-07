@@ -1,5 +1,5 @@
-# thorium
-Backend cohort Feb 2022 - May 2022
+# Next() :
+- it is a callback function in a middleware
+- it passses the control to the subsequent function
+- if next () is missed, the control flow will hang
 
-Assignment :
-https://docs.google.com/document/d/1N1HfDzEcDUHfD2cYkhdGh4UDHRibGTr7SEY0MiXwev4/edit?usp=sharing
