@@ -1,30 +1,38 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema( {
-     name:String,
-     balance:{type:Number,default:100},
-     address:String,
-     age:Number,
-     gender:{ type: String,
-          enum: ["male", "female", "LGBTQ"]},
-     isfreeAppUser:{type:Boolean,default:false}
+    firstName: String,
+    lastName: String,
+    mobile: {
+        type: String,
 
-}, { timestamps: true });
+        required: true
+    },
+    emailId: String,
+    password: String,
+    gender: {
+        type: String,
+        enum: ["male", "female", "other"]
+    },
+    age: Number,
+    isDeleted:{type:Boolean,default:false},
+
+} , { timestamps: true });
+
+module.exports = mongoose.model('User1', userSchema)
 
 
-module.exports = mongoose.model("newUser", userSchema)
-
-
-
-
-
-// { 
-//      _id: ObjectId("61951bfa4d9fe0d34da86829"),
-//      name: "Sabiha Khan",
-//       balance:100, // Default balance at user registration is 100
-//       address:"New delhi",
-//       age: 90,
-//        gender: “female” // Allowed values are - “male”, “female”, “other”
-//       isFreeAppUser: false // Default false value.
-//       }
-//  ```
+// {
+//     "_id" : ObjectId("6226e3d2b98f22b349ca58be"),
+//     "firstName" : "Sabiha",
+//     "lastName" : "Khan",
+//     "mobile" : "9898909087",
+//     "emailId" : "sk@gmail.com",
+//     "password" : "password123",
+//     "gender" : "female",
+// 	"isDeleted": false, //default value is false 
+//     "age" : 12,
+//     "createdAt" : ISODate("2022-03-08T05:04:18.737Z"),
+//     "updatedAt" : ISODate("2022-03-08T05:04:18.737Z"),
+//     "__v" : 0
+// }
