@@ -3,6 +3,7 @@ const { use } = require("express/lib/router");
 const jwt = require("jsonwebtoken");
 const { findByIdAndUpdate } = require("../models/userModel");
 const userModel = require("../models/userModel");
+const axios = require('axios');
 
 
 
@@ -16,7 +17,7 @@ const createUser = async function (req, res) {
     return res.status(400).send({ mes:"data not found"})
   }
   }catch(err){
-    res.status(500).send({mes:err.message})
+    res.status(400).send({mes:err.message})
   }
      
 };
